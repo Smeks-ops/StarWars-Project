@@ -1,4 +1,4 @@
-const app = require('./controllers/api')
+const app = require('./routes/api')
 const consola = require('consola')
 
 const PORT = 7000
