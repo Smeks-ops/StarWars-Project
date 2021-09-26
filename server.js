@@ -1,7 +1,7 @@
 const app = require('./routes/api')
 const consola = require('consola')
 
-const PORT = 7000
+const PORT = process.env.PORT || 7000
 
 
 
