@@ -3,25 +3,73 @@ const cors = require('cors')
 const { json } = require('body-parser');
 const axios = require('axios');
 const _ = require('underscore');
-
-
+const swaggerUI = require('swagger-ui-express')
+const swaggerJSDOC = require('swagger-jsdoc')
 
 const app = express()
+
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "SWAPI API",
+      version: "1.0.0",
+      description: "A simple Star Wars API",
+      contact: {
+        name: 'Osemeke Echenim',
+        email: 'echenim.osemeke@gmail.com'
+      },
+    },
+    servers: [
+      {
+        url: "https://localhost:7000"
+      }
+    ]
+  },
+  apis: ["./routes/*.js"]
+};
+
+const swaggerDocs = swaggerJSDOC(options)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
+
+
 
 app.use(cors())
 app.use(json())
 
 const BASE_URL = `https://swapi.dev/api/`
 
+
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Homepage
+ *     responses:
+ *       200:
+ *         description: try '/movies or /characters route'
+ *         
+ */
 app.get('/', (req, res) => {
   res.status(200).send('uh oh, try /movies or /characters')
 })
 
+/**
+ * @swagger
+ * /movies:
+ *   get:
+ *     summary: Returns the list of movies already sorted by release date, and listing the titles and opening crawls
+ *     tags: [Films]
+ *     responses:
+ *       200:
+ *         description: List of movies
+ */
 app.get('/movies', async (req, res) => {
 
   try {
     const response = await axios.get(BASE_URL + '/films/');
-    console.log('response', response)
 
     const arrays = (response.data.results)
     const resArray = [];
@@ -32,7 +80,6 @@ app.get('/movies', async (req, res) => {
       }
       resArray.push(datObj)
     }
-    console.log('resArray', resArray)
     res.send(resArray);
 
   } catch (error) {
@@ -40,6 +87,17 @@ app.get('/movies', async (req, res) => {
   }
 })
 
+
+/**
+ * @swagger
+ * /characters:
+ *   get:
+ *     summary: Returns the list of characters sorted by name, gender or height.
+ *     tags: [Characters]
+ *     responses:
+ *       200:
+ *         description: Input a 'sort' parameter with a value of 'name', 'gender' or 'height'. You can also sort for gender and height/name at the same time. 
+ */
 app.get('/characters', async (req, res) => {
   try {
     let { sort, gender } = req.query
