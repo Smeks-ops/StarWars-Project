@@ -9,9 +9,9 @@
   </a>
 </p>
 
-> A project that feeds on Star Wars Api 
+> A project that feeds on Star Wars Api
 
-### 🏠 [Homepage](&#34;http://localhost:7000/api-docs&#34;)
+### 🏠 [Homepage]("http://localhost:7000/api-docs")
 
 ## Install
 
@@ -23,6 +23,7 @@ npm install
 
 ```sh
 npm run start
+'for movies list, go to the /movies route, for characters, go to the characters route, Input a 'sort' parameter with a value of 'name', 'gender' or 'height'. You can also sort for gender and height/name at the same time.'
 ```
 
 ## Run tests
@@ -35,12 +36,13 @@ npm run test
 
 👤 **Osemeke Echenim**
 
-* Website: https://60d98cfc1445a84fb795bd7c--osemeke-portfolio.netlify.app/
-* Github: [@Smeks-ops](https://github.com/Smeks-ops)
+- Website: https://60d98cfc1445a84fb795bd7c--osemeke-portfolio.netlify.app/
+- Github: [@Smeks-ops](https://github.com/Smeks-ops)
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
 
-***
+---
+
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
